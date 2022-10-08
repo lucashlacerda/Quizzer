@@ -1,0 +1,297 @@
+:root,
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+p {
+  margin: 0;
+}
+
+input,
+select,
+button {
+  font: inherit;
+}
+
+:root {
+  --light-color: 220 3% 97%;
+  --dark-color: 231 42% 28%;
+  --primary-color: 230 34% 46%;
+  height: -webkit-fill-available;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: hsl(var(--light-color));
+  color: hsl(var(--dark-color));
+  height: 100vh;
+  height: -webkit-fill-available;
+}
+
+.btn {
+  border: 1px solid hsl(var(--primary-color));
+  background-color: hsl(var(--light-color));
+  color: var(--dark-color);
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transform-origin: center;
+  transition: all 150ms ease-in-out;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.btn--small {
+  font-size: 0.9rem;
+  padding: 5px 15px;
+  border-radius: 8px;
+}
+
+.btn--big {
+  font-size: 1.1rem;
+  border-radius: 15px;
+  padding: 15px 35px;
+}
+
+.btn--primary {
+  border: none;
+  background-color: hsl(var(--primary-color));
+  color: hsl(var(--light-color));
+}
+
+.btn--primary:not(:disabled):hover {
+  background-color: hsl(var(--primary-color) / 0.9);
+}
+
+.btn:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+/* TODO: :D this feels 'hacky' try to find better solution */
+body,
+#root,
+.app,
+.app--main {
+  display: flex;
+}
+
+#root,
+.app {
+  flex: 1;
+}
+
+.app,
+.app--main {
+  flex-direction: column;
+}
+
+.app--main {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.app--main > canvas {
+  position: fixed !important;
+}
+
+.app--header,
+.app--footer {
+  padding: 15px;
+}
+
+.app--header .logo {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.app--footer {
+  text-align: center;
+}
+
+.app--footer a {
+  color: hsl(var(--primary-color));
+}
+
+.app--background {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -100;
+  background-repeat: no-repeat, no-repeat;
+  background-position: top right, bottom left;
+  background-attachment: fixed, fixed;
+  background-image: url('./images/sqs-blob-top.png'),
+    url('./images/sqs-blob-bottom.png');
+}
+
+.app--background_questions_screen {
+  background-image: url('./images/qs-blob-top.png'),
+    url('./images/qs-blob-bottom.png');
+}
+
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  z-index: 100;
+  flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(var(--light-color));
+}
+
+.logo {
+  font-family: 'Karla', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: -0.1rem;
+}
+
+.logo > span {
+  color: #0084ff;
+}
+
+.description {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.api-error {
+  color: darkred;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.questions {
+  display: flex;
+  flex-direction: column;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.questions--results .question--answer {
+  pointer-events: none;
+}
+
+.questions--results .question--answer:not(.question--answer_correct) {
+  opacity: 0.5;
+}
+
+.control {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.question {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-bottom: 1px solid #dbdef0;
+  padding: 20px 0;
+}
+
+.question--title {
+  font-weight: bold;
+}
+
+.question--answers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.question--answer {
+  flex: 1 1 100%;
+}
+
+@media screen and (min-width: 450px) {
+  .question--answer {
+    flex: 0 0 auto;
+  }
+}
+
+.question--answer_selected {
+  background-color: #d6dbf5;
+  border-color: #d6dbf5;
+}
+
+.question--answer_correct {
+  background-color: #94d7a2;
+  border-color: #94d7a2;
+}
+
+.question--answer_incorrect {
+  background-color: #f8bcbc;
+  border-color: #f8bcbc;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.form-field .counter-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.form-field .counter-container button {
+  margin: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.form-field .counter-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  flex: 1;
+  text-align: center;
+}
+
+.form-field label {
+  text-transform: uppercase;
+  letter-spacing: -0.05rem;
+  font-weight: 500;
+}
+
+.form-field input[type='number'],
+.form-field select {
+  font-size: 0.9rem;
+  border: 1px solid hsl(var(--primary-color));
+  border-radius: 10px;
+  padding: 10px;
+  background-color: transparent;
+}
+
+.form button {
+  margin-top: 10px;
+}
